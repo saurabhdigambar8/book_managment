@@ -12,8 +12,9 @@ const authentication=async function(req,res,next){
    const decodedToken=jwt.verify(token,"project4SecreteKey")
    if (!decodedToken) {
     return res.status(401).send({ status: false, message: "invalid token" })
-    req.decodedToken=decodedToken
 }
+req.decodedToken=decodedToken
+req.userId=decodedToken.userId
 next()
 }catch(err){
     if (err.message.includes("signature") || err.message.includes("token") || err.message.includes("malformed")) {
@@ -29,8 +30,8 @@ const authorisation =async function(req,res,next){
     try{
         const decodedToken=req.decodedToken
         const bodyData=req.body
-        const paramBookId=req.params.bookId
-        const getBook = await bookModel.findById(paramsBookId)
+       const paramBookId=req.params.bookId
+        const getBook = await bookModel.findOne({_id:paramsBookId})
 
         if(bodyData.userId){
             if(bodyData.userId!=decodedToken.userId){

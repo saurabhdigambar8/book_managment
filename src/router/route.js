@@ -14,7 +14,11 @@ Router.get("/books/:bookId",authentication,getBookById)
 Router.put("/books/:bookId",authentication,authorisation,updateBook)
 Router.delete("/books/:bookId",authentication,authorisation,deleteBook)
 //-----review Api
-Router.post("//books/:bookId/review",authentication,createReview)
+Router.post("/books/:bookId/review",authentication,createReview)
 Router.put("/books/:bookId/review/:reviewId",authentication,updateReview)
-Router.delete(" /books/:bookId/review/:reviewId",authentication,deleteReviews)
+Router.delete("/books/:bookId/review/:reviewId",authentication,deleteReviews)
+//universal api
+Router.use("*",(req,res)=>{
+    return res.status(404).send({status:false,message:"Page not found"})
+})
 module.exports=Router 
