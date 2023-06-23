@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const reviewSchema =new  mongoose.Schema({
+const reviewSchema = new mongoose.Schema({
   bookId: {
     type: mongoose.Schema.Types.ObjectId,
     require: [true, "bookId is required"],
@@ -13,7 +13,7 @@ const reviewSchema =new  mongoose.Schema({
     trim: true
   },
   reviewedAt: {
-    type:Date,
+    type: Date,
     required: [true, "reviewedAt is required"],
     trim: true
   },

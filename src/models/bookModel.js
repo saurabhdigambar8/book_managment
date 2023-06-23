@@ -1,17 +1,17 @@
 const mongoose = require('mongoose')
 //const validator = require('validator')
-const bookSchema =new  mongoose.Schema({
+const bookSchema = new mongoose.Schema({
     title: {
         type: String,
         required: [true, "title is required"],
         validate: {  //for uniqueness check
-            validator: async function(value) {
-              const count = await this.model('user').countDocuments({ title: value });
-              return count === 0;
+            validator: async function (value) {
+                const count = await this.model('user').countDocuments({ title: value });
+                return count === 0;
             },
             message: 'Duplicate title found'
-          },
-          trim: true
+        },
+        trim: true
     },
     excerpt: {
         type: String,
@@ -28,13 +28,13 @@ const bookSchema =new  mongoose.Schema({
         type: String,
         required: [true, "ISBN is required"],
         validate: {  //for uniqueness check
-            validator: async function(value) {
-              const count = await this.model('user').countDocuments({ ISBN: value });
-              return count === 0;
+            validator: async function (value) {
+                const count = await this.model('user').countDocuments({ ISBN: value });
+                return count === 0;
             },
             message: 'Duplicate ISBN found'
-          },
-          trim: true
+        },
+        trim: true
     },
     category: {
         type: String,
@@ -61,12 +61,12 @@ const bookSchema =new  mongoose.Schema({
         required: [true, "releasedAt is required"],
         validate: {
             validator: function (value) {
-            let res=/^\d{4}-\d{2}-\d{2}$/.test(value)
-             return res
+                let res = /^\d{4}-\d{2}-\d{2}$/.test(value)
+                return res
             },
             message: 'Invalid date format must be in  YYYY-MM-DD'
-          },
-          trim: true
+        },
+        trim: true
     }
 }, { timestamps: true })
 module.exports = mongoose.model('Book', bookSchema)

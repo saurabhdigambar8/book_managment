@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const valid=require("validator")
+const valid = require("validator")
 const userSchema = new mongoose.Schema(
   {
     title: {
@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "phone is required"],
       validate: {
-        validator: async function(value) {
+        validator: async function (value) {
           const count = await this.model('user').countDocuments({ phone: value });
           return count === 0;
         },
@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema(
       },
       required: [true, "email is required"],
       validate: { // for uniqueness
-        validator: async function(value) {
+        validator: async function (value) {
           const count = await this.model('user').countDocuments({ email: value });
           return count === 0;
         },
@@ -59,8 +59,8 @@ const userSchema = new mongoose.Schema(
       city: { type: String },
       pincode: { type: String }
     },
-   
+
   },
-  {timestamps: true }
+  { timestamps: true }
 )
 module.exports = mongoose.model("user", userSchema)  
