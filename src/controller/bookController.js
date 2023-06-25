@@ -120,7 +120,7 @@ const deleteBook = async function (req, res) {
         }
         const deletedBook = await bookModel.findByIdAndUpdate(bookId, { isDeleted: true }, { new: true })
         return res.status(200).send({ status: true, message: "successfully deleted" })
-
+   
     } catch (err) {
         return res.status(500).send({ status: false, message: err.message })
     }
