@@ -31,15 +31,17 @@ const authorisation = async function (req, res, next) {
         const decodedToken = req.decodedToken
         const bodyData = req.body
         const paramBookId = req.params.bookId
-        const getBook = await bookModel.findOne({ _id: paramsBookId })
+        const getBook = await bookModel.findOne({ _id:paramBookId })
 
         if (bodyData.userId) {
             if (bodyData.userId != decodedToken.userId) {
                 return res.status(403).send({ status: false, message: "You are not authorised" })
             }
         }
-        if (getBook.userId != decodedToken.userId) {
+        if(paramBookId){
+          if (getBook.userId != decodedToken.userId) {
             return res.status(403).send({ status: false, message: "You are not authorised" })
+          }
         }
         next()
 

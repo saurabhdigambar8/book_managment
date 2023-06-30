@@ -61,7 +61,7 @@ const getBookById = async function (req, res) {
             return res.status(404).send({ status: false, message: "Book not found" })
         }
         const review = await reviewModel.find({ bookId: bookId, isDeleted: false })
-        const resData = { ...books, reviedBy: review } // doubt 
+        const resData = { ...books, reviedBy: review } 
         return res.status(200).send({ status: true, message: "Book list", data: resData })
 
 
@@ -114,7 +114,7 @@ const deleteBook = async function (req, res) {
         if (!ObjectId.isValid(bookId)) {
             return res.status(400).send({ status: false, message: "invalid bookId" })
         }
-        const getBook = await bookModel.findOne({ _id: bookId, isDeleted: false })//doubt
+        const getBook = await bookModel.findOne({ _id: bookId, isDeleted: false })
         if (!getBook) {
             return res.status(404).send({ status: false, message: "Book not found" })
         }

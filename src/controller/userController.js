@@ -8,7 +8,7 @@ const createUser = async function (req, res) {
         const data = req.body
         const userCreated = await userModel.create(data)
         return res.status(201).send({ status: true, data: userCreated })
-    } catch (err) {
+    } catch (err) {  
         if (err.message.includes("is required")) {
             return res.status(400).send({ status: false, message: err.message })
         }
